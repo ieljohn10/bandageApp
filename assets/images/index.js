@@ -13,6 +13,8 @@ import Bedroom from "./bedroom.png";
 import Kitchen from "./kitchen.png";
 import Flowers from "./flowers.png";
 
+import Utensils from "./utensils.png";
+
 export {
   CardCover5,
   CardCover6,
@@ -25,4 +27,5 @@ export {
   Bedroom,
   Kitchen,
   Flowers,
+  Utensils,
 };
