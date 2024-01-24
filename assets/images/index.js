@@ -9,6 +9,10 @@ import Book from "./bx_bxs-book-reader.png";
 import CarbonBook from "./carbon_book.png";
 import Arrow from "./uil_arrow-growth.png";
 
+import Bedroom from "./bedroom.png";
+import Kitchen from "./kitchen.png";
+import Flowers from "./flowers.png";
+
 export {
   CardCover5,
   CardCover6,
@@ -18,4 +22,7 @@ export {
   Book,
   CarbonBook,
   Arrow,
+  Bedroom,
+  Kitchen,
+  Flowers,
 };

@@ -1,4 +1,14 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import GridItem from "./components/GridItem/GridItem";
 import {
   CardCover5,
@@ -9,19 +19,29 @@ import {
   CarbonBook,
   Book,
   Arrow,
+  Bedroom,
+  Kitchen,
+  Flowers,
 } from "../assets/images";
 import Image from "next/image";
 
 const Title = (props: any) => {
-  const { title, weight = 700, fontSize = 24, lineHeight = 32 } = props;
+  const {
+    title,
+    weight = 700,
+    fontSize = 24,
+    lineHeight = 32,
+    color = "#252B42",
+    textAlign = "center",
+  } = props;
   return (
     <Typography
       {...props}
       fontFamily="Montserrat"
-      textAlign="center"
+      textAlign={textAlign}
       textTransform="uppercase"
       lineHeight={`${lineHeight}px`}
-      color={"#252B42"}
+      color={color}
       fontWeight={weight}
       fontSize={`${fontSize}px`}
     >
@@ -31,15 +51,22 @@ const Title = (props: any) => {
 };
 
 const SubTitle = (props: any) => {
-  const { title, weight = 400, fontSize = 20, lineHeight = 30 } = props;
+  const {
+    title,
+    weight = 400,
+    fontSize = 20,
+    lineHeight = 30,
+    color = "#737373",
+    textAlign = "center",
+  } = props;
   return (
     <Typography
       {...props}
       fontFamily="Montserrat"
-      textAlign="center"
+      textAlign={textAlign}
       textTransform="capitalize"
       lineHeight={`${lineHeight}px`}
-      color={"#737373"}
+      color={color}
       fontWeight={weight}
       fontSize={fontSize}
     >
@@ -186,7 +213,7 @@ export default function Home() {
 
       {/* Featured Products */}
       <Box paddingY="80px">
-        <Box>
+        <Box marginBottom="80px">
           <SubTitle title="Featured Products" />
           <Title title="THE BEST SERVICES" marginY="10px" />
           <SubTitle
@@ -195,9 +222,144 @@ export default function Home() {
             lineHeight={20}
           />
         </Box>
-        <Box>
-          <Box paddingX="40px" paddingY="35px"></Box>
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Box
+            width="315px"
+            paddingX="40px"
+            paddingY="35px"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap="20px"
+          >
+            <Image
+              style={{
+                objectFit: "cover",
+                width: "72px",
+                height: "72px",
+              }}
+              src={Book}
+              alt={"book"}
+              loading="lazy"
+            />
+            <Title title="Easy Wins" />
+            <SubTitle
+              title="Get your best looking smile now!"
+              fontSize={14}
+              lineHeight={20}
+            />
+          </Box>
+          <Box
+            width="315px"
+            paddingX="40px"
+            paddingY="35px"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap="20px"
+          >
+            <Image
+              style={{
+                objectFit: "cover",
+                width: "72px",
+                height: "72px",
+              }}
+              src={CarbonBook}
+              alt={"carbonbook"}
+              loading="lazy"
+            />
+            <Title title="Concrete" />
+            <SubTitle
+              title="Defalcate is most focused in helping you discover your most beautiful smile"
+              fontSize={14}
+              lineHeight={20}
+            />
+          </Box>
+          <Box
+            width="315px"
+            paddingX="40px"
+            paddingY="35px"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap="20px"
+          >
+            <Image
+              style={{
+                objectFit: "cover",
+                width: "72px",
+                height: "72px",
+              }}
+              src={Arrow}
+              alt={"arrow"}
+              loading="lazy"
+            />
+            <Title title="Hack Growth" />
+            <SubTitle
+              title="Overcame any hurdle or any other problem."
+              fontSize={14}
+              lineHeight={20}
+            />
+          </Box>
         </Box>
+      </Box>
+
+      {/* Featured Posts */}
+      <Box paddingY="112px">
+        <Box marginBottom="80px">
+          <SubTitle
+            title="Practice Advice"
+            color="#23A6F0"
+            fontSize={14}
+            lineHeight={24}
+            weight={700}
+            marginBottom="10px"
+          />
+          <Title title="Featured Posts" />
+        </Box>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 1, sm: 12, md: 15 }}
+        >
+          {[Bedroom, Kitchen, Flowers].map((pic, index) => (
+            <Grid item xs={1} sm={4} md={5} key={index}>
+              <Card sx={{ maxWidth: 345 }}>
+                <Image height={300} src={pic} alt={`pic${index}`} />
+                <CardContent sx={{ padding: "25px" }}>
+                  <CardActions sx={{ padding: 0, marginBottom: "10px" }}>
+                    <Button sx={{ padding: 0 }} size="small">
+                      Google
+                    </Button>
+                    <Button sx={{ padding: 0 }} size="small">
+                      Trending
+                    </Button>
+                    <Button sx={{ padding: 0 }} size="small">
+                      New
+                    </Button>
+                  </CardActions>
+                  <Title
+                    gutterBottom
+                    title="Loudest à la Madison #1 (L'integral)"
+                    fontSize={20}
+                    weight={400}
+                    lineHeight={30}
+                    textAlign="left"
+                  />
+                  <SubTitle
+                    title="We focus on ergonomics and meeting you where you work. It's only a keystroke away."
+                    fontSize={14}
+                    lineHeight={20}
+                    textAlign="left"
+                  />
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Container>
   );
