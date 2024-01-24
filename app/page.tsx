@@ -26,13 +26,23 @@ import {
   Kitchen,
   Flowers,
   Utensils,
+  UserProfile,
+  AboutUs1,
+  AboutUs2,
+  AboutUs3,
+  AboutUs4,
+  AboutUs5,
+  AboutUs6,
+  AboutUs7,
+  AboutUs8,
+  AboutUs9,
 } from "../assets/images";
 import Image from "next/image";
 
 const Title = (props: any) => {
   const {
     title,
-    weight = 700,
+    fontWeight = 700,
     fontSize = 24,
     lineHeight = 32,
     color = "#252B42",
@@ -46,7 +56,7 @@ const Title = (props: any) => {
       textTransform="uppercase"
       lineHeight={`${lineHeight}px`}
       color={color}
-      fontWeight={weight}
+      fontWeight={fontWeight}
       fontSize={`${fontSize}px`}
     >
       {title}
@@ -57,7 +67,7 @@ const Title = (props: any) => {
 const SubTitle = (props: any) => {
   const {
     title,
-    weight = 400,
+    fontWeight = 400,
     fontSize = 20,
     lineHeight = 30,
     color = "#737373",
@@ -71,7 +81,7 @@ const SubTitle = (props: any) => {
       textTransform="capitalize"
       lineHeight={`${lineHeight}px`}
       color={color}
-      fontWeight={weight}
+      fontWeight={fontWeight}
       fontSize={fontSize}
     >
       {title}
@@ -317,7 +327,7 @@ export default function Home() {
               color="#23A6F0"
               fontSize={14}
               lineHeight={24}
-              weight={700}
+              fontWeight={700}
               marginBottom="10px"
             />
             <Title title="Featured Posts" />
@@ -347,7 +357,7 @@ export default function Home() {
                       gutterBottom
                       title="Loudest à la Madison #1 (L'integral)"
                       fontSize={20}
-                      weight={400}
+                      fontWeight={400}
                       lineHeight={30}
                       textAlign="left"
                     />
@@ -368,7 +378,75 @@ export default function Home() {
         </Box>
 
         {/* About Us */}
-        <Box paddingY="80px"></Box>
+        <Box paddingY="80px" display="flex" justifyContent="space-between">
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width="438px"
+          >
+            <Title
+              title="What they say about us"
+              fontSize={24}
+              fontWeight={700}
+              lineHeight={32}
+            />
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              paddingY="30px"
+              marginY="28px"
+              gap="24px"
+            >
+              <Image height={90} src={UserProfile} alt="utensils" />
+              <SubTitle
+                title="Slate helps you see how many more days you need to work to reach your financial goal."
+                fontSize={14}
+                fontWeight={700}
+                lineHeight={24}
+              />
+              <Box>
+                <SubTitle
+                  title="Regina Miles"
+                  fontSize={14}
+                  fontWeight={700}
+                  lineHeight={24}
+                  color="#23A6F0"
+                />
+                <SubTitle
+                  title="Designer"
+                  fontSize={14}
+                  fontWeight={700}
+                  lineHeight={24}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Grid container spacing={1} columns={3} width="470px">
+            {[
+              AboutUs1,
+              AboutUs2,
+              AboutUs3,
+              AboutUs4,
+              AboutUs5,
+              AboutUs6,
+              AboutUs7,
+              AboutUs8,
+              AboutUs9,
+            ].map((pic, index) => (
+              <Grid item key={index} md={1}>
+                <Image
+                  height={142}
+                  width={142}
+                  src={pic}
+                  alt={`camera${index}`}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Container>
 
       {/* Call to Action */}
@@ -401,7 +479,7 @@ export default function Home() {
           <SubTitle
             title="Designing Better Experience"
             fontSize={14}
-            weight={700}
+            fontWeight={700}
             lineHeight={24}
             color="#23A6F0"
           />
@@ -465,7 +543,7 @@ export default function Home() {
             <SubTitle
               title="About Us"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -473,7 +551,7 @@ export default function Home() {
             <SubTitle
               title="Carrier"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -481,7 +559,7 @@ export default function Home() {
             <SubTitle
               title="We are hiring"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -489,7 +567,7 @@ export default function Home() {
             <SubTitle
               title="Blog"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -506,7 +584,7 @@ export default function Home() {
             <SubTitle
               title="About Us"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -514,7 +592,7 @@ export default function Home() {
             <SubTitle
               title="Carrier"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -522,7 +600,7 @@ export default function Home() {
             <SubTitle
               title="We are hiring"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -530,7 +608,7 @@ export default function Home() {
             <SubTitle
               title="Blog"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -547,7 +625,7 @@ export default function Home() {
             <SubTitle
               title="Business Marketing"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -555,7 +633,7 @@ export default function Home() {
             <SubTitle
               title="User Analytic"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -563,7 +641,7 @@ export default function Home() {
             <SubTitle
               title="Live Chat"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -571,7 +649,7 @@ export default function Home() {
             <SubTitle
               title="Unlimited Support"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -588,7 +666,7 @@ export default function Home() {
             <SubTitle
               title="IOS & Android"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -596,7 +674,7 @@ export default function Home() {
             <SubTitle
               title="Watch a Demo"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -604,7 +682,7 @@ export default function Home() {
             <SubTitle
               title="Customers"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -612,7 +690,7 @@ export default function Home() {
             <SubTitle
               title="API"
               fontSize={14}
-              weight={700}
+              fontWeight={700}
               lineHeight={24}
               textAlign="left"
               gutterBottom
@@ -654,7 +732,7 @@ export default function Home() {
             title={"Made With Love By Finland All Right Reserved "}
             fontSize={14}
             lineHeight={24}
-            weight={700}
+            fontWeight={700}
             textAlign={"left"}
           />
         </Container>
