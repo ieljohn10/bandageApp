@@ -15,7 +15,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 600,
   maxHeight: 700,
   bgcolor: "background.paper",
   borderRadius: 2,
@@ -69,7 +68,7 @@ function CartModal({ open, handleClose }: any) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style }}>
+      <Box sx={{ ...style }} width={{ xs: 300, md: 700 }}>
         <Box
           display="flex"
           alignItems="center"
@@ -92,11 +91,13 @@ function CartModal({ open, handleClose }: any) {
             <Divider />
             <Box
               display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
               marginY={2}
               alignItems="center"
               justifyContent="space-between"
+              gap={2}
             >
-              <Box display="flex" gap={2}>
+              <Box display="flex" alignItems="center" gap={2}>
                 <Image
                   height={50}
                   width={50}

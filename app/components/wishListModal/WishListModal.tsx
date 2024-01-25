@@ -14,7 +14,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 800,
   maxHeight: 700,
   minHeight: 200,
   bgcolor: "background.paper",
@@ -40,7 +39,7 @@ const WishListModal = ({ open, handleClose }: any) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style }}>
+      <Box sx={{ ...style }} width={{ xs: 300, md: 700 }}>
         <Box
           display="flex"
           alignItems="center"
@@ -76,6 +75,7 @@ const WishListModal = ({ open, handleClose }: any) => {
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
+                  flexDirection={{ xs: "column", md: "row" }}
                   gap={4}
                   flexGrow={1}
                 >
