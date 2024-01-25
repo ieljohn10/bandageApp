@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Brand1,
   Brand2,
@@ -32,8 +32,30 @@ import {
   Star,
   StarBorder,
 } from "@mui/icons-material";
+import products from "../api/products";
+import ProductItem from "../components/productItem/ProductItem";
 
 function Shop() {
+  const { getProducts } = products();
+
+  const [productData, setProductData] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+
+  const fetchProductData = async (limit: number, skip: number) => {
+    setLoadingProducts(true);
+    try {
+      const data = await getProducts(limit, skip);
+      setProductData(data);
+      setLoadingProducts(false);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductData(8, 0);
+  }, []);
+
   return (
     <Container>
       {/* Breadcrumbs */}
@@ -276,60 +298,12 @@ function Shop() {
           spacing={{ xs: 1, md: 3 }}
           columns={{ xs: 1, sm: 12, md: 20 }}
         >
-          {Array.from(Array(8)).map((_, index) => (
-            <Grid item xs={1} sm={4} md={5} key={index}>
-              <Box
-                display="flex"
-                alignItems="center"
-                flexDirection="column"
-                width="183px"
-                margin={{ xs: "auto" }}
-              >
-                <Image
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "238px",
-                  }}
-                  src={ProductCover5}
-                  alt={"product"}
-                  loading="lazy"
-                />
-                <Box paddingTop="25px" marginBottom="35px">
-                  <Title title="Graphic Design" variant="body1" />
-                  <SubTitle
-                    title="English Department"
-                    fontWeight={700}
-                    variant="body2"
-                    marginY={0.5}
-                  />
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    gap={1}
-                  >
-                    <Typography
-                      color="#BDBDBD"
-                      fontSize="16px"
-                      fontWeight={700}
-                      variant="body1"
-                    >
-                      $16.48
-                    </Typography>
-                    <Typography
-                      color="#23856D"
-                      fontSize="16px"
-                      fontWeight={700}
-                      variant="body1"
-                    >
-                      $6.48
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-          ))}
+          {!loadingProducts &&
+            productData.map((data: any, index) => (
+              <Grid key={`productItem${data.id}`} item xs={1} sm={4} md={5}>
+                <ProductItem data={data} />
+              </Grid>
+            ))}
         </Grid>
       </Box>
 

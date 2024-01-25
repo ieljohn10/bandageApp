@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/navigation/page";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import Contacts from "./components/contacts/Contacts";
-import CustomFont from "../assets/theme/CustomFont";
-import Footer from "./components/footer/Footer";
+import Main from "./Main";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,12 +30,7 @@ export default function RootLayout({
         ></link>
       </head>
       <body className={inter.className}>
-        <CustomFont>
-          <Contacts />
-          <Navigation />
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-          <Footer />
-        </CustomFont>
+        <Main>{children}</Main>
       </body>
     </html>
   );

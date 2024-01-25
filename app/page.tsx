@@ -45,6 +45,8 @@ import {
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import products from "./api/products";
+import ProductItem from "./components/productItem/ProductItem";
+import Link from "next/link";
 
 export default function Home() {
   const { getProducts } = products();
@@ -163,61 +165,10 @@ export default function Home() {
             >
               {!loadingProducts &&
                 productData.map((data: any, index) => (
-                  <Grid item xs={1} sm={4} md={4} key={data.id}>
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      flexDirection="column"
-                      width="183px"
-                      margin={{ xs: "auto" }}
-                    >
-                      <Image
-                        style={{
-                          objectFit: "contain",
-                          width: "100%",
-                          height: "238px",
-                        }}
-                        width={100}
-                        height={100}
-                        src={data?.thumbnail}
-                        alt={data?.title}
-                        loading="lazy"
-                      />
-                      <Box paddingTop="25px" marginBottom="35px">
-                        <Title title={data?.title} variant="body1" />
-                        <SubTitle
-                          title={data?.description}
-                          fontWeight={700}
-                          variant="body2"
-                          marginY={0.5}
-                        />
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          gap={1}
-                        >
-                          <Typography
-                            color="#BDBDBD"
-                            fontSize="16px"
-                            fontWeight={700}
-                            variant="body1"
-                          >
-                            ${data?.price}
-                          </Typography>
-                          <Typography
-                            color="#23856D"
-                            fontSize="16px"
-                            fontWeight={700}
-                            variant="body1"
-                          >
-                            $
-                            {data?.price -
-                              data?.price * (data?.discountPercentage / 100)}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
+                  <Grid key={`productItem${data.id}`} item xs={1} sm={4} md={4}>
+                    <Link href="/shop">
+                      <ProductItem data={data} />
+                    </Link>
                   </Grid>
                 ))}
             </Grid>
