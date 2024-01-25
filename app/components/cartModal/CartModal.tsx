@@ -7,7 +7,7 @@ import {
   addToCart,
   removeFromCart,
   selectCartItems,
-} from "../../features/cart/cart";
+} from "../../features/cart/Cart";
 import { useDispatch } from "react-redux";
 
 const style = {
