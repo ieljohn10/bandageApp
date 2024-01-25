@@ -10,7 +10,7 @@ import {
   ShoppingCart,
 } from "@mui/icons-material";
 import CartModal from "../../cartModal/CartModal";
-import { selectCartItems } from "@/app/features/cart/Cart";
+import { selectCartItems } from "@/app/features/cart/cart";
 import { useSelector } from "react-redux";
 import WishListModal from "../../wishListModal/WishListModal";
 import { selectWishListItems } from "@/app/features/wishlist/wishlist";

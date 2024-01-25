@@ -37,7 +37,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 import ImageContainer from "../components/imageContainer/ImageContainer";
 import Image from "next/image";
-import { addToCart } from "../features/cart/Cart";
+import { addToCart } from "../features/cart/cart";
 import {
   addToWishList,
   removeFromWishList,
