@@ -1,8 +1,16 @@
 import { Add, Close, Remove } from "@mui/icons-material";
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Coffee } from "../../../assets/images";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
+import {
+  addToCart,
+  removeFromCart,
+  selectCartItems,
+} from "@/app/features/cart/cart";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,6 +28,39 @@ const style = {
 };
 
 function CartModal({ open, handleClose }: any) {
+  const cartData = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+
+  const [groupItemInCart, setGroupItemInCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  // ** add item to cart
+  const addItemToCart = (data: any) => {
+    dispatch(addToCart(data));
+  };
+
+  // ** remove item to cart
+  const removeItemToCart = (data: any) => {
+    dispatch(removeFromCart({ id: data.id }));
+  };
+
+  useEffect(() => {
+    // ** grouping of same id items
+    const groupItem = cartData.reduce((results: any, item: any) => {
+      (results[item.id] = results[item.id] || []).push(item);
+
+      return results;
+    }, {});
+
+    const totalList = Object.entries(groupItem).map(
+      ([key, item]: any) => item.length * item[0].price
+    );
+    const total = totalList.reduce((prev, current) => (prev += current));
+
+    setTotalPrice(total);
+    setGroupItemInCart(groupItem);
+  }, [cartData, dispatch]);
+
   return (
     <Modal
       open={open}
@@ -46,8 +87,8 @@ function CartModal({ open, handleClose }: any) {
           </Typography>
           <Close fontSize="medium" />
         </Box>
-        {[1, 2, 3, 4, 5].map((_, index) => (
-          <Box key={index}>
+        {Object.entries(groupItemInCart).map(([key, item]: any) => (
+          <Box key={key}>
             <Divider />
             <Box
               display="flex"
@@ -56,12 +97,18 @@ function CartModal({ open, handleClose }: any) {
               justifyContent="space-between"
             >
               <Box display="flex" gap={2}>
-                <Image height={50} width={50} src={Coffee} alt="coffee" />
-                <Typography>Item 1</Typography>
+                <Image
+                  height={50}
+                  width={50}
+                  src={item[0].thumbnail}
+                  alt="coffee"
+                />
+                <Typography>{item[0].title}</Typography>
               </Box>
               <Box display="flex" alignItems="center" gap={4}>
                 <Box display="flex" alignItems="center">
                   <Button
+                    onClick={() => removeItemToCart(item[0])}
                     variant="text"
                     size="small"
                     sx={{ width: 30, minWidth: 30 }}
@@ -74,9 +121,10 @@ function CartModal({ open, handleClose }: any) {
                     width={50}
                     textAlign="center"
                   >
-                    122
+                    {item.length}
                   </Typography>
                   <Button
+                    onClick={() => addItemToCart(item[0])}
                     variant="text"
                     size="small"
                     sx={{ width: 30, minWidth: 30 }}
@@ -92,7 +140,7 @@ function CartModal({ open, handleClose }: any) {
                     textAlign="center"
                     fontWeight={600}
                   >
-                    $122
+                    ${item[0].price}
                   </Typography>
                 </Box>
               </Box>
@@ -122,7 +170,7 @@ function CartModal({ open, handleClose }: any) {
             textAlign="center"
             fontWeight={600}
           >
-            $122
+            ${totalPrice}
           </Typography>
         </Box>
 

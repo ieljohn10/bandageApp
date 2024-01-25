@@ -33,17 +33,23 @@ import {
 } from "@mui/icons-material";
 import products from "../api/products";
 import ProductItem from "../components/productItem/ProductItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 import ImageContainer from "../components/imageContainer/ImageContainer";
 import Image from "next/image";
+import { addToCart } from "../features/cart/cart";
 
 function Shop() {
   const { getProducts } = products();
   const basketItem = useSelector((state: RootState) => state.basket.value);
+  const dispatch = useDispatch();
 
   const [productData, setProductData] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
+
+  const addCartItem = (data: any) => {
+    dispatch(addToCart(data));
+  };
 
   const fetchProductData = async (limit: number, skip: number) => {
     setLoadingProducts(true);
@@ -55,8 +61,6 @@ function Shop() {
       console.log("error: ", error);
     }
   };
-
-  console.log(basketItem);
 
   useEffect(() => {
     fetchProductData(8, 0);
@@ -193,6 +197,7 @@ function Shop() {
                 <FavoriteBorder fontSize="small" sx={{ color: "#252B42" }} />
               </Button>
               <Button
+                onClick={() => addCartItem(basketItem)}
                 variant="outlined"
                 sx={{
                   height: 30,

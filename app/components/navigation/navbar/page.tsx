@@ -9,24 +9,23 @@ import {
   ShoppingCart,
 } from "@mui/icons-material";
 import CartModal from "../../cartModal/CartModal";
+import { selectCartItems } from "@/app/features/cart/cart";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
 
 const LinkButton = ({ title, link, color, marginX = 7 }: any) => {
   return (
-    <Button
-      sx={{
-        marginX: `${marginX}px`,
-      }}
-    >
-      <Typography
-        textTransform="capitalize"
-        fontWeight="700"
-        color={color}
-        component="a"
-        href={link}
+    <Link href={link}>
+      <Button
+        sx={{
+          marginX: `${marginX}px`,
+        }}
       >
-        {title}
-      </Typography>
-    </Button>
+        <Typography textTransform="capitalize" fontWeight="700" color={color}>
+          {title}
+        </Typography>
+      </Button>
+    </Link>
   );
 };
 
@@ -42,6 +41,9 @@ const Navbar = () => {
   //     }
   //   });
   // }, []);
+
+  const cartData = useSelector((state: RootState) => state);
+  const cartDataCount = selectCartItems(cartData);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -125,11 +127,29 @@ const Navbar = () => {
             />
           </Box>
           <Search fontSize="medium" sx={{ color: "#23A6F0" }} />
-          <ShoppingCart
-            fontSize="medium"
-            sx={{ color: "#23A6F0" }}
-            onClick={handleOpen}
-          />
+          <Box position="relative" marginTop={0.5}>
+            <ShoppingCart
+              fontSize="medium"
+              sx={{ color: "#23A6F0" }}
+              onClick={handleOpen}
+            />
+            <Box
+              textAlign="center"
+              width={20}
+              height={20}
+              top={-8}
+              left={12}
+              bgcolor="#23856d"
+              borderRadius={20}
+              padding={0.2}
+              position="absolute"
+              fontSize={12}
+              fontWeight={600}
+              color="#fff"
+            >
+              {cartDataCount.length}
+            </Box>
+          </Box>
           <FavoriteOutlined fontSize="medium" sx={{ color: "#23A6F0" }} />
         </Box>
       </Box>

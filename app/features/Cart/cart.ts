@@ -1,35 +1,61 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+export interface Item {
+  products: {
+    id: number;
+    title: string;
+    decription: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: [];
+  };
+}
 export interface CartState {
-  value: number;
+  products: Item[];
 }
 
 const initialState: CartState = {
-  value: 0,
+  products: [],
 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    addToCart: (state, action: PayloadAction<Item>) => {
+      state.products = [...state.products, action.payload];
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+
+    removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
+      console.log(action.payload.id);
+
+      const index = state.products.findIndex(
+        //@ts-ignore
+        (item) => item.id === action.payload?.id
+      );
+
+      // ** create new copy of cart
+      const newCart = [...state.products];
+
+      if (index >= 0) {
+        newCart.splice(index, 1);
+      }
+
+      state.products = newCart;
     },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = cartSlice.actions;
+export const selectCartItems = (state: any) => state.cart.products;
+export const selectCartItemsWithId = (state: any, id: number) =>
+  state.cart.products.filter((item: any) => item.id === id);
+
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
