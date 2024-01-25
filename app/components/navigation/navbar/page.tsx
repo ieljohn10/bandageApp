@@ -12,6 +12,8 @@ import CartModal from "../../cartModal/CartModal";
 import { selectCartItems } from "@/app/features/cart/cart";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
+import WishListModal from "../../wishListModal/WishListModal";
+import { selectWishListItems } from "@/app/features/wishlist/wishlist";
 
 const LinkButton = ({ title, link, color, marginX = 7 }: any) => {
   return (
@@ -42,15 +44,24 @@ const Navbar = () => {
   //   });
   // }, []);
 
-  const cartData = useSelector((state: RootState) => state);
-  const cartDataCount = selectCartItems(cartData);
+  const cartData = useSelector(selectCartItems);
+  const wishListData = useSelector(selectWishListItems);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishList, setOpenWishList] = useState(false);
+
+  const handleOpenCart = () => {
+    setOpenCart(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseCart = () => {
+    setOpenCart(false);
+  };
+
+  const handleOpenWishList = () => {
+    setOpenWishList(true);
+  };
+  const handleCloseWishList = () => {
+    setOpenWishList(false);
   };
 
   return (
@@ -127,12 +138,8 @@ const Navbar = () => {
             />
           </Box>
           <Search fontSize="medium" sx={{ color: "#23A6F0" }} />
-          <Box position="relative" marginTop={0.5}>
-            <ShoppingCart
-              fontSize="medium"
-              sx={{ color: "#23A6F0" }}
-              onClick={handleOpen}
-            />
+          <Box position="relative" marginTop={0.5} onClick={handleOpenCart}>
+            <ShoppingCart fontSize="medium" sx={{ color: "#23A6F0" }} />
             <Box
               textAlign="center"
               width={20}
@@ -147,13 +154,32 @@ const Navbar = () => {
               fontWeight={600}
               color="#fff"
             >
-              {cartDataCount.length}
+              {cartData.length}
             </Box>
           </Box>
-          <FavoriteOutlined fontSize="medium" sx={{ color: "#23A6F0" }} />
+          <Box position="relative" marginTop={0.5} onClick={handleOpenWishList}>
+            <FavoriteOutlined fontSize="medium" sx={{ color: "#23A6F0" }} />
+            <Box
+              textAlign="center"
+              width={20}
+              height={20}
+              top={-8}
+              left={12}
+              bgcolor="#23856d"
+              borderRadius={20}
+              padding={0.2}
+              position="absolute"
+              fontSize={12}
+              fontWeight={600}
+              color="#fff"
+            >
+              {wishListData.length}
+            </Box>
+          </Box>
         </Box>
       </Box>
-      <CartModal open={open} handleClose={handleClose} />
+      <CartModal open={openCart} handleClose={handleCloseCart} />
+      <WishListModal open={openWishList} handleClose={handleCloseWishList} />
     </>
   );
 };

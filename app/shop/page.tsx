@@ -38,17 +38,33 @@ import { RootState } from "../store/store";
 import ImageContainer from "../components/imageContainer/ImageContainer";
 import Image from "next/image";
 import { addToCart } from "../features/cart/cart";
+import {
+  addToWishList,
+  removeFromWishList,
+  selectWishListItems,
+} from "../features/wishlist/wishlist";
 
 function Shop() {
   const { getProducts } = products();
-  const basketItem = useSelector((state: RootState) => state.basket.value);
   const dispatch = useDispatch();
+  const basketItem = useSelector((state: RootState) => state.basket.value);
+  const wishListItem = useSelector(selectWishListItems);
 
   const [productData, setProductData] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
+  const [alreadyInWishList, setAlreadyInWishList] = useState(false);
 
   const addCartItem = (data: any) => {
     dispatch(addToCart(data));
+  };
+
+  const addWishListItem = (data: any) => {
+    if (alreadyInWishList) {
+      dispatch(removeFromWishList(data));
+    } else {
+      dispatch(addToWishList(data));
+    }
+    setAlreadyInWishList((prev) => !prev);
   };
 
   const fetchProductData = async (limit: number, skip: number) => {
@@ -64,6 +80,13 @@ function Shop() {
 
   useEffect(() => {
     fetchProductData(8, 0);
+  }, []);
+
+  useEffect(() => {
+    const data = wishListItem.filter((item: any) => item.id === basketItem?.id);
+    if (data.length > 0) {
+      setAlreadyInWishList(true);
+    }
   }, []);
 
   return (
@@ -185,7 +208,9 @@ function Shop() {
             <Box marginTop={8} display="flex" alignItems="center" gap={2}>
               <Button variant="contained">Select Options</Button>
               <Button
-                variant="outlined"
+                onClick={() => addWishListItem(basketItem)}
+                variant="contained"
+                color={alreadyInWishList ? "error" : "inherit"}
                 sx={{
                   height: 30,
                   minWidth: 30,
@@ -198,7 +223,7 @@ function Shop() {
               </Button>
               <Button
                 onClick={() => addCartItem(basketItem)}
-                variant="outlined"
+                variant="contained"
                 sx={{
                   height: 30,
                   minWidth: 30,
@@ -210,7 +235,8 @@ function Shop() {
                 <ShoppingCart fontSize="small" sx={{ color: "#252B42" }} />
               </Button>
               <Button
-                variant="outlined"
+                variant="contained"
+                color="inherit"
                 sx={{
                   height: 30,
                   minWidth: 30,

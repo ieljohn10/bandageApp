@@ -55,9 +55,12 @@ function CartModal({ open, handleClose }: any) {
     const totalList = Object.entries(groupItem).map(
       ([key, item]: any) => item.length * item[0].price
     );
-    const total = totalList.reduce((prev, current) => (prev += current));
 
-    setTotalPrice(total);
+    if (totalList.length > 0) {
+      const total = totalList.reduce((prev, current) => (prev += current));
+
+      setTotalPrice(total);
+    }
     setGroupItemInCart(groupItem);
   }, [cartData, dispatch]);
 
@@ -79,7 +82,6 @@ function CartModal({ open, handleClose }: any) {
           <Typography
             marginX={1}
             variant="h5"
-            width={50}
             textAlign="center"
             fontWeight={600}
           >
@@ -157,11 +159,10 @@ function CartModal({ open, handleClose }: any) {
           <Typography
             marginX={1}
             variant="h6"
-            width={50}
             textAlign="center"
             fontWeight={600}
           >
-            Total:
+            Total :
           </Typography>
           <Typography
             marginX={1}
