@@ -2,9 +2,7 @@ import { Add, Close, Remove } from "@mui/icons-material";
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Coffee } from "../../../assets/images";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
 import {
   addToCart,
   removeFromCart,
