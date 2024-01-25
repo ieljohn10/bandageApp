@@ -33,8 +33,6 @@ export const wishListSlice = createSlice({
     },
 
     removeFromWishList: (state, action: PayloadAction<{ id: number }>) => {
-      console.log(action.payload.id);
-
       const newWishList = state.products.filter(
         //@ts-ignore
         (item) => item.id !== action.payload?.id

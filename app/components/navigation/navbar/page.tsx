@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Box, Button, Container, Typography } from "@mui/material";
 import {
@@ -11,7 +12,6 @@ import {
 import CartModal from "../../cartModal/CartModal";
 import { selectCartItems } from "@/app/features/cart/cart";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
 import WishListModal from "../../wishListModal/WishListModal";
 import { selectWishListItems } from "@/app/features/wishlist/wishlist";
 

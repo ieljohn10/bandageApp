@@ -33,8 +33,6 @@ export const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
-      console.log(action.payload.id);
-
       const index = state.products.findIndex(
         //@ts-ignore
         (item) => item.id === action.payload?.id
