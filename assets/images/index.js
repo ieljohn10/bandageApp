@@ -35,6 +35,8 @@ import Brand4 from "./fa-brands-4.png";
 import Brand5 from "./fa-brands-5.png";
 import Brand6 from "./fa-brands-6.png";
 
+import CoffeeTable from "./coffeeTable.png";
+
 export {
   CardCover5,
   CardCover6,
@@ -65,4 +67,5 @@ export {
   Brand4,
   Brand5,
   Brand6,
+  CoffeeTable,
 };

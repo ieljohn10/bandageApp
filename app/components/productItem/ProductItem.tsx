@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import Title from "../Title/Title";
-import SubTitle from "../SubTitle/SubTitle";
+import Title from "../title/Title";
+import SubTitle from "../subTitle/SubTitle";
 
 interface ProductItemDataTypes {
   data: {
@@ -15,6 +15,11 @@ interface ProductItemDataTypes {
 }
 
 function ProductItem({ data }: ProductItemDataTypes) {
+  const price = (data: any) => {
+    return Math.round(
+      data?.price - data?.price * (data?.discountPercentage / 100)
+    );
+  };
   return (
     <Box
       display="flex"
@@ -49,6 +54,7 @@ function ProductItem({ data }: ProductItemDataTypes) {
             fontSize="16px"
             fontWeight={700}
             variant="body1"
+            textAlign="center"
           >
             ${data?.price}
           </Typography>
@@ -57,8 +63,9 @@ function ProductItem({ data }: ProductItemDataTypes) {
             fontSize="16px"
             fontWeight={700}
             variant="body1"
+            textAlign="center"
           >
-            ${data?.price - data?.price * (data?.discountPercentage / 100)}
+            ${price(data)}
           </Typography>
         </Box>
       </Box>

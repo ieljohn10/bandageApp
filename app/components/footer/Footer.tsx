@@ -1,7 +1,7 @@
 import { Box, Button, Container, Divider, TextField } from "@mui/material";
 import React from "react";
-import Title from "../Title/Title";
-import SubTitle from "../SubTitle/SubTitle";
+import Title from "../title/Title";
+import SubTitle from "../subTitle/SubTitle";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 
 function Footer() {

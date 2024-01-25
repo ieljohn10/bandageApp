@@ -9,15 +9,14 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import GridItem from "./components/GridItem/GridItem";
-import Title from "./components/Title/Title";
-import SubTitle from "./components/SubTitle/SubTitle";
+import GridItem from "./components/gridItem/GridItem";
+import Title from "./components/title/Title";
+import SubTitle from "./components/subTitle/SubTitle";
 import {
   CardCover5,
   CardCover6,
   CardCover7,
   CardCover8,
-  ProductCover5,
   CarbonBook,
   Book,
   Arrow,
@@ -47,13 +46,20 @@ import { useEffect, useState } from "react";
 import products from "./api/products";
 import ProductItem from "./components/productItem/ProductItem";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addItem } from "./features/basket/basket";
 
 export default function Home() {
   const { getProducts } = products();
+  const dispatch = useDispatch();
 
   const [productData, setProductData] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [skip, setSkip] = useState(0);
+
+  const addToBasket = (data: any) => {
+    dispatch(addItem(data));
+  };
 
   const fetchProductData = async (
     limit: number,
@@ -166,7 +172,7 @@ export default function Home() {
               {!loadingProducts &&
                 productData.map((data: any, index) => (
                   <Grid key={`productItem${data.id}`} item xs={1} sm={4} md={4}>
-                    <Link href="/shop">
+                    <Link href="/shop" onClick={() => addToBasket(data)}>
                       <ProductItem data={data} />
                     </Link>
                   </Grid>

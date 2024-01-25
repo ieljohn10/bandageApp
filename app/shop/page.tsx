@@ -11,7 +11,6 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import {
   Brand1,
@@ -21,10 +20,10 @@ import {
   Brand5,
   Brand6,
   Coffee,
-  ProductCover5,
+  CoffeeTable,
 } from "../../assets/images";
-import Title from "../components/Title/Title";
-import SubTitle from "../components/SubTitle/SubTitle";
+import Title from "../components/title/Title";
+import SubTitle from "../components/subTitle/SubTitle";
 import {
   FavoriteBorder,
   RemoveRedEye,
@@ -34,9 +33,14 @@ import {
 } from "@mui/icons-material";
 import products from "../api/products";
 import ProductItem from "../components/productItem/ProductItem";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import ImageContainer from "../components/imageContainer/ImageContainer";
+import Image from "next/image";
 
 function Shop() {
   const { getProducts } = products();
+  const basketItem = useSelector((state: RootState) => state.basket.value);
 
   const [productData, setProductData] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -51,6 +55,8 @@ function Shop() {
       console.log("error: ", error);
     }
   };
+
+  console.log(basketItem);
 
   useEffect(() => {
     fetchProductData(8, 0);
@@ -88,21 +94,21 @@ function Shop() {
       >
         <Box alignSelf="center">
           <Box width={{ sm: 334, md: 506 }} height={{ sm: 334, md: 450 }}>
-            <Image
-              style={{ width: "100%", height: "100%" }}
-              src={Coffee}
-              alt="coffee"
+            <ImageContainer
+              thumbnail={basketItem?.thumbnail}
+              title={basketItem?.title}
             />
           </Box>
           <Box display="flex" gap={3} marginTop={1}>
-            <Image height={75} src={Coffee} alt="coffee" />
-            <Image height={75} src={Coffee} alt="coffee" />
+            {basketItem.images.map((item, index) => (
+              <Image key={item} height={75} width={100} src={item} alt={item} />
+            ))}
           </Box>
         </Box>
         <Box display="flex" flexDirection="column" flexGrow={1} marginY={2}>
           <Box>
             <SubTitle
-              title="Floating Phone"
+              title={basketItem.title}
               fontWeight={500}
               textTransform="capitalize"
               variant="h5"
@@ -119,7 +125,7 @@ function Shop() {
               </Box>
               <Typography fontWeight={600}>10 Reviews</Typography>
             </Box>
-            <Title title="$1,139.33" textAlign="left" />
+            <Title title={`$${basketItem.price}`} textAlign="left" />
             <Box marginTop={1}>
               <Box display="flex">
                 <SubTitle title="Availability :" fontWeight={600} />
@@ -273,11 +279,11 @@ function Shop() {
             />
           </Box>
           <Box>
-            <Image
+            <ImageContainer
               style={{ borderRadius: 10 }}
-              height={413}
-              src={Coffee}
-              alt="coffee"
+              thumbnail={CoffeeTable}
+              title="coffeetable"
+              height={"413"}
             />
           </Box>
         </Box>
@@ -316,51 +322,51 @@ function Shop() {
         gap={{ xs: 5 }}
       >
         <Box width={{ sm: 149, md: 103 }} height={{ sm: "auto", md: 35 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand1}
-            alt="coffee"
+            thumbnail={Brand1}
+            title="coffee"
           />
         </Box>
         <Box width={{ sm: 149, md: 83 }} height={{ sm: "auto", md: 59 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand2}
-            alt="coffee"
+            thumbnail={Brand2}
+            title="coffee"
           />
         </Box>
         <Box width={{ sm: 149, md: 102 }} height={{ sm: "auto", md: 75 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand3}
-            alt="coffee"
+            thumbnail={Brand3}
+            title="coffee"
           />
         </Box>
         <Box width={{ sm: 149, md: 103 }} height={{ sm: "auto", md: 42 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand4}
-            alt="coffee"
+            thumbnail={Brand4}
+            title="coffee"
           />
         </Box>
         <Box width={{ sm: 149, md: 104 }} height={{ sm: "auto", md: 62 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand5}
-            alt="coffee"
+            thumbnail={Brand5}
+            title="coffee"
           />
         </Box>
         <Box width={{ sm: 149, md: 76 }} height={{ sm: "auto", md: 72 }}>
-          <Image
+          <ImageContainer
             objectFit="contain"
             style={{ height: "100%", width: "100%" }}
-            src={Brand6}
-            alt="coffee"
+            thumbnail={Brand6}
+            title="coffee"
           />
         </Box>
       </Box>
