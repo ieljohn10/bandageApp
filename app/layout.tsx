@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/page";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import Contacts from "./components/contacts/Contacts";
 import CustomFont from "../assets/theme/CustomFont";
+import Footer from "./components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Contacts />
           <Navigation />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <Footer />
         </CustomFont>
       </body>
     </html>

@@ -46,8 +46,8 @@ const Navbar = () => {
         </Typography>
         <Box display="flex">
           <LinkButton title="Home" link="/" color={"#737373"} />
-          <LinkButton title="Shop" link="/" color={"#737373"} />
-          <LinkButton title="About" link="/about" color={"#737373"} />
+          <LinkButton title="Shop" link="/shop" color={"#737373"} />
+          <LinkButton title="About" link="/" color={"#737373"} />
           <LinkButton title="Blog" link="/" color={"#737373"} />
           <LinkButton title="Contact" link="/" color={"#737373"} />
           <LinkButton title="Pages" link="/" color={"#737373"} />

@@ -26,6 +26,15 @@ import AboutUs7 from "./about-us-7.png";
 import AboutUs8 from "./about-us-8.png";
 import AboutUs9 from "./about-us-9.png";
 
+import Coffee from "./coffee.jpg";
+
+import Brand1 from "./fa-brands-1.png";
+import Brand2 from "./fa-brands-2.png";
+import Brand3 from "./fa-brands-3.png";
+import Brand4 from "./fa-brands-4.png";
+import Brand5 from "./fa-brands-5.png";
+import Brand6 from "./fa-brands-6.png";
+
 export {
   CardCover5,
   CardCover6,
@@ -49,4 +58,11 @@ export {
   AboutUs7,
   AboutUs8,
   AboutUs9,
+  Coffee,
+  Brand1,
+  Brand2,
+  Brand3,
+  Brand4,
+  Brand5,
+  Brand6,
 };
