@@ -2,18 +2,29 @@ import { Box, Button, Container, Divider, TextField } from "@mui/material";
 import React from "react";
 import Title from "../Title/Title";
 import SubTitle from "../SubTitle/SubTitle";
+import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 
 function Footer() {
   return (
     <>
       <Box bgcolor={"#FAFAFA"}>
         <Container>
-          <Title
-            title="Bandages"
-            textAlign="left"
-            marginY="40px"
-            paddingY="13px"
-          />
+          <Box
+            display="flex"
+            alignItems={{ xs: "self-start", md: "center" }}
+            justifyContent="space-between"
+            marginY={4}
+            paddingY={3}
+            gap={2}
+            flexDirection={{ xs: "column", md: "row" }}
+          >
+            <Title title="Bandages" textAlign="left" />
+            <Box display="flex" alignItems="center" gap={3}>
+              <Facebook fontSize="medium" sx={{ color: "#23A6F0" }} />
+              <Instagram fontSize="medium" sx={{ color: "#23A6F0" }} />
+              <Twitter fontSize="medium" sx={{ color: "#23A6F0" }} />
+            </Box>
+          </Box>
           <Divider />
         </Container>
       </Box>

@@ -24,6 +24,13 @@ import {
 } from "../../assets/images";
 import Title from "../components/Title/Title";
 import SubTitle from "../components/SubTitle/SubTitle";
+import {
+  FavoriteBorder,
+  RemoveRedEye,
+  ShoppingCart,
+  Star,
+  StarBorder,
+} from "@mui/icons-material";
 
 function Shop() {
   return (
@@ -77,8 +84,18 @@ function Shop() {
               textTransform="capitalize"
               variant="h5"
               textAlign="left"
-              marginBottom={2}
+              marginBottom={1}
             />
+            <Box display="flex" alignItems="center" gap={2} marginBottom={1}>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <StarBorder fontSize="medium" sx={{ color: "#F3CD03" }} />
+              </Box>
+              <Typography fontWeight={600}>10 Reviews</Typography>
+            </Box>
             <Title title="$1,139.33" textAlign="left" />
             <Box marginTop={1}>
               <Box display="flex">
@@ -132,8 +149,44 @@ function Shop() {
                 }}
               />
             </Box>
-            <Box marginTop={8}>
+            <Box marginTop={8} display="flex" alignItems="center" gap={2}>
               <Button variant="contained">Select Options</Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  height: 30,
+                  minWidth: 30,
+                  width: 30,
+                  borderRadius: 15,
+                  borderColor: "#BDBDBD",
+                }}
+              >
+                <FavoriteBorder fontSize="small" sx={{ color: "#252B42" }} />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  height: 30,
+                  minWidth: 30,
+                  width: 30,
+                  borderRadius: 15,
+                  borderColor: "#BDBDBD",
+                }}
+              >
+                <ShoppingCart fontSize="small" sx={{ color: "#252B42" }} />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  height: 30,
+                  minWidth: 30,
+                  width: 30,
+                  borderRadius: 15,
+                  borderColor: "#BDBDBD",
+                }}
+              >
+                <RemoveRedEye fontSize="small" sx={{ color: "#252B42" }} />
+              </Button>
             </Box>
           </Box>
         </Box>

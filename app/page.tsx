@@ -40,6 +40,12 @@ import {
   AboutUs9,
 } from "../assets/images";
 import Image from "next/image";
+import {
+  AccessAlarm,
+  InsertComment,
+  Star,
+  StarBorder,
+} from "@mui/icons-material";
 
 export default function Home() {
   return (
@@ -47,7 +53,7 @@ export default function Home() {
       <Container>
         {/* Grid Items */}
         <Box
-          paddingY="80px"
+          paddingY={10}
           sx={{
             display: "grid",
             gridAutoFlow: { xs: "column", md: "row" },
@@ -101,7 +107,7 @@ export default function Home() {
         </Box>
 
         {/* Best Seller Products */}
-        <Box paddingY="80px">
+        <Box paddingY={8}>
           <Box>
             <SubTitle title="Featured Products" variant="h6" fontWeight={600} />
             <Title title="BESTSELLER PRODUCTS" marginY="10px" />
@@ -195,7 +201,7 @@ export default function Home() {
         </Box>
 
         {/* Featured Products */}
-        <Box paddingY="80px">
+        <Box paddingY={8}>
           <Box marginBottom="80px">
             <SubTitle title="Featured Products" variant="h6" fontWeight={600} />
             <Title title="THE BEST SERVICES" marginY="10px" />
@@ -293,7 +299,7 @@ export default function Home() {
         </Box>
 
         {/* Featured Posts */}
-        <Box paddingY="112px">
+        <Box paddingY={10}>
           <Box marginBottom="80px">
             <SubTitle
               title="Practice Advice"
@@ -338,6 +344,23 @@ export default function Home() {
                       textAlign="left"
                     />
                   </CardContent>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-around"
+                  >
+                    <Box display="flex" alignItems="center" gap={0.5}>
+                      <AccessAlarm fontSize="small" sx={{ color: "#23A6F0" }} />
+                      <Typography variant="body2">22 April 2021</Typography>
+                    </Box>
+                    <Box display="flex" alignItems="center" gap={0.5}>
+                      <InsertComment
+                        fontSize="small"
+                        sx={{ color: "#23A6F0" }}
+                      />
+                      <Typography variant="body2">10 comments</Typography>
+                    </Box>
+                  </Box>
                   <CardActions>
                     <Button size="small">Learn More</Button>
                   </CardActions>
@@ -376,6 +399,13 @@ export default function Home() {
               gap="24px"
             >
               <Image height={90} src={UserProfile} alt="utensils" />
+              <Box display="flex" alignItems="center" gap={1}>
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <Star fontSize="medium" sx={{ color: "#F3CD03" }} />
+                <StarBorder fontSize="medium" sx={{ color: "#F3CD03" }} />
+              </Box>
               <SubTitle
                 paddingX={2}
                 title="Slate helps you see how many more days you need to work to reach your financial goal."
