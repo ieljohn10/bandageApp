@@ -1,15 +1,12 @@
+"use client";
 import {
   Box,
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Container,
-  Divider,
-  FormControl,
   Grid,
-  TextField,
   Typography,
 } from "@mui/material";
 import GridItem from "./components/GridItem/GridItem";
@@ -46,8 +43,41 @@ import {
   Star,
   StarBorder,
 } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import products from "./api/products";
 
 export default function Home() {
+  const { getProducts } = products();
+
+  const [productData, setProductData] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [skip, setSkip] = useState(0);
+
+  const fetchProductData = async (
+    limit: number,
+    skip: number,
+    isLoadMore = false
+  ) => {
+    setLoadingProducts(true);
+    try {
+      const data = await getProducts(limit, skip);
+      if (isLoadMore) {
+        setProductData((prev) => prev.concat(data));
+        setSkip((prev) => prev + limit);
+      } else {
+        setProductData(data);
+        setSkip(limit);
+      }
+      setLoadingProducts(false);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductData(10, 0);
+  }, []);
+
   return (
     <>
       <Container>
@@ -131,62 +161,68 @@ export default function Home() {
               spacing={{ xs: 1, md: 3 }}
               columns={{ xs: 1, sm: 12, md: 20 }}
             >
-              {Array.from(Array(20)).map((_, index) => (
-                <Grid item xs={1} sm={4} md={4} key={index}>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    flexDirection="column"
-                    width="183px"
-                    margin={{ xs: "auto" }}
-                  >
-                    <Image
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "238px",
-                      }}
-                      src={ProductCover5}
-                      alt={"product"}
-                      loading="lazy"
-                    />
-                    <Box paddingTop="25px" marginBottom="35px">
-                      <Title title="Graphic Design" variant="body1" />
-                      <SubTitle
-                        title="English Department"
-                        fontWeight={700}
-                        variant="body2"
-                        marginY={0.5}
+              {!loadingProducts &&
+                productData.map((data: any, index) => (
+                  <Grid item xs={1} sm={4} md={4} key={data.id}>
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      flexDirection="column"
+                      width="183px"
+                      margin={{ xs: "auto" }}
+                    >
+                      <Image
+                        style={{
+                          objectFit: "contain",
+                          width: "100%",
+                          height: "238px",
+                        }}
+                        width={100}
+                        height={100}
+                        src={data?.thumbnail}
+                        alt={data?.title}
+                        loading="lazy"
                       />
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap={1}
-                      >
-                        <Typography
-                          color="#BDBDBD"
-                          fontSize="16px"
+                      <Box paddingTop="25px" marginBottom="35px">
+                        <Title title={data?.title} variant="body1" />
+                        <SubTitle
+                          title={data?.description}
                           fontWeight={700}
-                          variant="body1"
+                          variant="body2"
+                          marginY={0.5}
+                        />
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          gap={1}
                         >
-                          $16.48
-                        </Typography>
-                        <Typography
-                          color="#23856D"
-                          fontSize="16px"
-                          fontWeight={700}
-                          variant="body1"
-                        >
-                          $6.48
-                        </Typography>
+                          <Typography
+                            color="#BDBDBD"
+                            fontSize="16px"
+                            fontWeight={700}
+                            variant="body1"
+                          >
+                            ${data?.price}
+                          </Typography>
+                          <Typography
+                            color="#23856D"
+                            fontSize="16px"
+                            fontWeight={700}
+                            variant="body1"
+                          >
+                            $
+                            {data?.price -
+                              data?.price * (data?.discountPercentage / 100)}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
-                </Grid>
-              ))}
+                  </Grid>
+                ))}
             </Grid>
             <Button
+              onClick={() => fetchProductData(10, skip, true)}
               variant="outlined"
               sx={{
                 fontSize: "14px",

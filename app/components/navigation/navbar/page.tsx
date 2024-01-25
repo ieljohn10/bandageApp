@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Box, Button, Container, Typography } from "@mui/material";
 import {
@@ -30,7 +30,18 @@ const LinkButton = ({ title, link, color, marginX = 7 }: any) => {
 };
 
 const Navbar = () => {
-  const [display, setDisplay] = useState(false);
+  // const [display, setDisplay] = useState(true);
+
+  // useEffect(() => {
+  //   window.addEventListener("orientationchange", (data) => {
+  //     if (window.screen.width > 900) {
+  //       setDisplay(true);
+  //     } else {
+  //       setDisplay(false);
+  //     }
+  //   });
+  // }, []);
+
   return (
     <Box
       display="flex"
@@ -65,15 +76,16 @@ const Navbar = () => {
           </Typography>
           <Box
             display={{ xs: "block", md: "none" }}
-            onClick={() => {
-              setDisplay((prev) => !prev);
-            }}
+            // onClick={() => {
+            //   setDisplay((prev) => !prev);
+            // }}
           >
             <Menu fontSize="medium" sx={{ color: "#737373" }} />
           </Box>
         </Box>
         <Box
-          display={display ? "flex" : "none"}
+          // display={display ? "flex" : "none"}
+          display="flex"
           flexDirection={{ xs: "column", md: "row" }}
           alignItems="center"
         >
@@ -86,7 +98,7 @@ const Navbar = () => {
         </Box>
       </Box>
       <Box
-        display={display ? "flex" : "none"}
+        display="flex"
         flexDirection={{ xs: "column", md: "row" }}
         alignItems="center"
         gap={2}

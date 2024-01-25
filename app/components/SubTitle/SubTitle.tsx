@@ -19,6 +19,7 @@ const SubTitle = (props: any) => {
       color={color}
       fontWeight={fontWeight}
       variant={variant}
+      noWrap
     >
       {title}
     </Typography>

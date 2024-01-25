@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Breadcrumbs,
@@ -200,10 +201,22 @@ function Shop() {
           justifyContent="center"
           marginY={3}
         >
-          <Tabs aria-label="disabled tabs example">
-            <Tab label="Description" sx={{ fontWeight: 700 }} />
-            <Tab label="Additional Information" sx={{ fontWeight: 700 }} />
-            <Tab label="Reviews (0)" sx={{ fontWeight: 700 }} />
+          <Tabs
+            value="description"
+            onChange={() => {}}
+            aria-label="disabled tabs example"
+          >
+            <Tab
+              value="description"
+              label="Description"
+              sx={{ fontWeight: 700 }}
+            />
+            <Tab
+              value="additional"
+              label="Additional Information"
+              sx={{ fontWeight: 700 }}
+            />
+            <Tab value="review" label="Reviews (0)" sx={{ fontWeight: 700 }} />
           </Tabs>
         </Box>
         <Divider />

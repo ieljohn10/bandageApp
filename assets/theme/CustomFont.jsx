@@ -25,6 +25,22 @@ const CustomFont = ({ children }) => {
         xl: 1536,
       },
     },
+    components: {
+      MuiTypography: {
+        styleOverrides: {
+          noWrap(styles) {
+            return {
+              whiteSpace: "initial",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: String(styles.ownerState["data-lines"] || "3"),
+              WebkitBoxOrient: "vertical",
+            };
+          },
+        },
+      },
+    },
   });
   theme = responsiveFontSizes(theme);
 
