@@ -1,8 +1,12 @@
 "use client";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+} from "@mui/material/styles";
 
 const CustomFont = ({ children }) => {
-  const theme = createTheme({
+  let theme = createTheme({
     typography: {
       fontFamily: [
         "Montserrat",
@@ -12,7 +16,17 @@ const CustomFont = ({ children }) => {
         "sans-serif",
       ].join(","),
     },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
   });
+  theme = responsiveFontSizes(theme);
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

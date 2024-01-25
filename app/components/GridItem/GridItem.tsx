@@ -12,18 +12,18 @@ function GridItem(props: any) {
         loading="lazy"
       />
       <Box position="absolute" top={24} left={24}>
-        <Typography color={"#2DC071"} fontSize="14px" fontWeight="700">
+        <Typography color={"#2DC071"} fontWeight="700" variant="body2">
           5 Items
         </Typography>
         <Typography
           color={"#252B42"}
-          fontSize="40px"
           fontWeight="700"
           textTransform="uppercase"
+          variant="h4"
         >
           Furniture
         </Typography>
-        <Typography color={"#252B42"} fontSize="14px" fontWeight="700">
+        <Typography color={"#252B42"} fontWeight="700" variant="subtitle2">
           Read more
         </Typography>
       </Box>

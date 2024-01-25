@@ -13,6 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import GridItem from "./components/GridItem/GridItem";
+import Title from "./components/Title/Title";
+import SubTitle from "./components/SubTitle/SubTitle";
 import {
   CardCover5,
   CardCover6,
@@ -39,56 +41,6 @@ import {
 } from "../assets/images";
 import Image from "next/image";
 
-const Title = (props: any) => {
-  const {
-    title,
-    fontWeight = 700,
-    fontSize = 24,
-    lineHeight = 32,
-    color = "#252B42",
-    textAlign = "center",
-  } = props;
-  return (
-    <Typography
-      {...props}
-      fontFamily="Montserrat"
-      textAlign={textAlign}
-      textTransform="uppercase"
-      lineHeight={`${lineHeight}px`}
-      color={color}
-      fontWeight={fontWeight}
-      fontSize={`${fontSize}px`}
-    >
-      {title}
-    </Typography>
-  );
-};
-
-const SubTitle = (props: any) => {
-  const {
-    title,
-    fontWeight = 400,
-    fontSize = 20,
-    lineHeight = 30,
-    color = "#737373",
-    textAlign = "center",
-  } = props;
-  return (
-    <Typography
-      {...props}
-      fontFamily="Montserrat"
-      textAlign={textAlign}
-      textTransform="capitalize"
-      lineHeight={`${lineHeight}px`}
-      color={color}
-      fontWeight={fontWeight}
-      fontSize={fontSize}
-    >
-      {title}
-    </Typography>
-  );
-};
-
 export default function Home() {
   return (
     <>
@@ -98,33 +50,51 @@ export default function Home() {
           paddingY="80px"
           sx={{
             display: "grid",
-            gridAutoFlow: "row",
-            gridTemplateColumns: "repeat(10, 1fr)",
-            gridTemplateRows: "repeat(2, 308px)",
+            gridAutoFlow: { xs: "column", md: "row" },
+            gridTemplateColumns: {
+              xs: "100%",
+              md: "repeat(10, 1fr)",
+            },
+            gridTemplateRows: {
+              xs: "repeat(4, 331px)",
+              md: "repeat(2, 308px)",
+            },
             gap: "7px",
           }}
         >
           <GridItem
-            sx={{ gridColumn: "1 / 5", gridRow: "1 / 3" }}
-            height={623}
+            sx={{
+              gridColumn: { xs: "1 / 2", md: "1 / 5" },
+              gridRow: { xs: "1/2", md: "1 / 3" },
+            }}
+            height={{ xs: "100%", md: 623 }}
             image={CardCover5}
             name={"cardcover5"}
           />
           <GridItem
-            sx={{ gridColumn: "5/11", gridRow: "1 / 2" }}
-            height={308}
+            sx={{
+              gridColumn: { xs: "1 / 2", md: "5 / 11" },
+              gridRow: { xs: "2/3", md: "1 / 2" },
+            }}
+            height={{ xs: "100%", md: 308 }}
             image={CardCover6}
             name={"cardcover5"}
           />
           <GridItem
-            sx={{ gridColumn: "5/8", gridRow: "2 / 3" }}
-            height={308}
+            sx={{
+              gridColumn: { xs: "1 / 2", md: "5 / 8" },
+              gridRow: { xs: "3/4", md: "2 / 3" },
+            }}
+            height={{ xs: "100%", md: 308 }}
             image={CardCover8}
             name={"cardcover5"}
           />
           <GridItem
-            sx={{ gridColumn: "8/11", gridRow: "2 / 3" }}
-            height={308}
+            sx={{
+              gridColumn: { xs: "1 / 2", md: "8 / 11" },
+              gridRow: { xs: "4/5", md: "2 / 3" },
+            }}
+            height={{ xs: "100%", md: 308 }}
             image={CardCover7}
             name={"cardcover5"}
           />
@@ -133,12 +103,12 @@ export default function Home() {
         {/* Best Seller Products */}
         <Box paddingY="80px">
           <Box>
-            <SubTitle title="Featured Products" />
+            <SubTitle title="Featured Products" variant="h6" fontWeight={600} />
             <Title title="BESTSELLER PRODUCTS" marginY="10px" />
             <SubTitle
               title="Problems trying to resolve the conflict between Products"
-              fontSize={14}
-              lineHeight={20}
+              variant="body1"
+              fontWeight={500}
             />
           </Box>
 
@@ -152,7 +122,7 @@ export default function Home() {
           >
             <Grid
               container
-              spacing={{ xs: 2, md: 3 }}
+              spacing={{ xs: 1, md: 3 }}
               columns={{ xs: 1, sm: 12, md: 20 }}
             >
               {Array.from(Array(20)).map((_, index) => (
@@ -162,6 +132,7 @@ export default function Home() {
                     alignItems="center"
                     flexDirection="column"
                     width="183px"
+                    margin={{ xs: "auto" }}
                   >
                     <Image
                       style={{
@@ -174,15 +145,12 @@ export default function Home() {
                       loading="lazy"
                     />
                     <Box paddingTop="25px" marginBottom="35px">
-                      <Title
-                        title="Graphic Design"
-                        fontSize={16}
-                        lineHeight={24}
-                      />
+                      <Title title="Graphic Design" variant="body1" />
                       <SubTitle
                         title="English Department"
-                        fontSize={14}
-                        lineHeight={24}
+                        fontWeight={700}
+                        variant="body2"
+                        marginY={0.5}
                       />
                       <Box
                         display="flex"
@@ -194,7 +162,7 @@ export default function Home() {
                           color="#BDBDBD"
                           fontSize="16px"
                           fontWeight={700}
-                          lineHeight="24px"
+                          variant="body1"
                         >
                           $16.48
                         </Typography>
@@ -202,7 +170,7 @@ export default function Home() {
                           color="#23856D"
                           fontSize="16px"
                           fontWeight={700}
-                          lineHeight="24px"
+                          variant="body1"
                         >
                           $6.48
                         </Typography>
@@ -229,15 +197,20 @@ export default function Home() {
         {/* Featured Products */}
         <Box paddingY="80px">
           <Box marginBottom="80px">
-            <SubTitle title="Featured Products" />
+            <SubTitle title="Featured Products" variant="h6" fontWeight={600} />
             <Title title="THE BEST SERVICES" marginY="10px" />
             <SubTitle
               title="Problems trying to resolve the conflict between"
-              fontSize={14}
-              lineHeight={20}
+              variant="body1"
+              fontWeight={500}
             />
           </Box>
-          <Box display="flex" alignItems="center" justifyContent="center">
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            alignItems="center"
+            justifyContent="center"
+          >
             <Box
               width="315px"
               paddingX="40px"
@@ -260,8 +233,8 @@ export default function Home() {
               <Title title="Easy Wins" />
               <SubTitle
                 title="Get your best looking smile now!"
-                fontSize={14}
-                lineHeight={20}
+                variant="body2"
+                fontWeight={500}
               />
             </Box>
             <Box
@@ -286,8 +259,8 @@ export default function Home() {
               <Title title="Concrete" />
               <SubTitle
                 title="Defalcate is most focused in helping you discover your most beautiful smile"
-                fontSize={14}
-                lineHeight={20}
+                variant="body2"
+                fontWeight={500}
               />
             </Box>
             <Box
@@ -312,8 +285,8 @@ export default function Home() {
               <Title title="Hack Growth" />
               <SubTitle
                 title="Overcame any hurdle or any other problem."
-                fontSize={14}
-                lineHeight={20}
+                variant="body2"
+                fontWeight={500}
               />
             </Box>
           </Box>
@@ -325,8 +298,7 @@ export default function Home() {
             <SubTitle
               title="Practice Advice"
               color="#23A6F0"
-              fontSize={14}
-              lineHeight={24}
+              variant="body1"
               fontWeight={700}
               marginBottom="10px"
             />
@@ -339,7 +311,7 @@ export default function Home() {
           >
             {[Bedroom, Kitchen, Flowers].map((pic, index) => (
               <Grid item xs={1} sm={4} md={5} key={index}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ maxWidth: 345, margin: { xs: "auto" } }}>
                   <Image height={300} src={pic} alt={`pic${index}`} />
                   <CardContent sx={{ padding: "25px" }}>
                     <CardActions sx={{ padding: 0, marginBottom: "10px" }}>
@@ -356,15 +328,13 @@ export default function Home() {
                     <Title
                       gutterBottom
                       title="Loudest à la Madison #1 (L'integral)"
-                      fontSize={20}
-                      fontWeight={400}
-                      lineHeight={30}
+                      variant="h6"
+                      fontWeight={500}
                       textAlign="left"
                     />
                     <SubTitle
                       title="We focus on ergonomics and meeting you where you work. It's only a keystroke away."
-                      fontSize={14}
-                      lineHeight={20}
+                      variant="body2"
                       textAlign="left"
                     />
                   </CardContent>
@@ -378,19 +348,24 @@ export default function Home() {
         </Box>
 
         {/* About Us */}
-        <Box paddingY="80px" display="flex" justifyContent="space-between">
+        <Box
+          paddingY="80px"
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Box
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width="438px"
+            width={{ xs: "320px", md: "438px" }}
           >
             <Title
               title="What they say about us"
-              fontSize={24}
+              variant="h5"
               fontWeight={700}
-              lineHeight={32}
             />
             <Box
               display="flex"
@@ -402,29 +377,35 @@ export default function Home() {
             >
               <Image height={90} src={UserProfile} alt="utensils" />
               <SubTitle
+                paddingX={2}
                 title="Slate helps you see how many more days you need to work to reach your financial goal."
-                fontSize={14}
+                variant="body2"
                 fontWeight={700}
-                lineHeight={24}
               />
               <Box>
                 <SubTitle
                   title="Regina Miles"
-                  fontSize={14}
+                  variant="body2"
                   fontWeight={700}
-                  lineHeight={24}
                   color="#23A6F0"
                 />
                 <SubTitle
                   title="Designer"
-                  fontSize={14}
+                  variant="body2"
                   fontWeight={700}
-                  lineHeight={24}
+                  marginY={1}
                 />
               </Box>
             </Box>
           </Box>
-          <Grid container spacing={1} columns={3} width="470px">
+          <Grid
+            container
+            spacing={1}
+            columns={3}
+            width={{ xs: "440px", md: "470px" }}
+            alignItems="center"
+            justifyContent="center"
+          >
             {[
               AboutUs1,
               AboutUs2,
@@ -436,10 +417,20 @@ export default function Home() {
               AboutUs8,
               AboutUs9,
             ].map((pic, index) => (
-              <Grid item key={index} md={1}>
+              <Grid
+                item
+                key={index}
+                md={1}
+                sx={{
+                  height: { xs: 112, md: 142 },
+                  width: { xs: 112, md: 142 },
+                }}
+              >
                 <Image
-                  height={142}
-                  width={142}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
                   src={pic}
                   alt={`camera${index}`}
                 />
@@ -478,27 +469,23 @@ export default function Home() {
         >
           <SubTitle
             title="Designing Better Experience"
-            fontSize={14}
+            variant="body2"
             fontWeight={700}
-            lineHeight={24}
             color="#23A6F0"
           />
           <Title
             title="Problems trying to resolve the conflict between"
-            fontSize={40}
-            lineHeight={50}
+            variant="h4"
           />
           <SubTitle
             title="Problems trying to resolve the conflict between the two major realms of Classical physics: "
-            fontSize={14}
-            lineHeight={20}
+            variant="body2"
           />
           <Typography
             textAlign="center"
             color="#23856D"
-            fontSize="24px"
+            variant="h5"
             fontWeight={700}
-            lineHeight="32px"
           >
             $16.48
           </Typography>
@@ -518,9 +505,9 @@ export default function Home() {
         <Container>
           <Title
             title="Bandages"
-            textAlign={"left"}
-            marginY={"40px"}
-            paddingY={"13px"}
+            textAlign="left"
+            marginY="40px"
+            paddingY="13px"
           />
           <Divider />
         </Container>
@@ -528,6 +515,8 @@ export default function Home() {
       <Container>
         <Box
           display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          gap={3}
           marginX="auto"
           justifyContent="space-between"
           paddingY="50px"
@@ -535,81 +524,66 @@ export default function Home() {
           <Box>
             <Title
               title="Company Info"
-              fontSize={16}
-              lineHeight={24}
+              variant="h6"
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="About Us"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Carrier"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="We are hiring"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Blog"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
           </Box>
           <Box>
-            <Title
-              title="Legal"
-              fontSize={16}
-              lineHeight={24}
-              textAlign="left"
-              gutterBottom
-            />
+            <Title title="Legal" variant="h6" textAlign="left" gutterBottom />
             <SubTitle
               title="About Us"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Carrier"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="We are hiring"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Blog"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
@@ -617,40 +591,35 @@ export default function Home() {
           <Box>
             <Title
               title="Features"
-              fontSize={16}
-              lineHeight={24}
+              variant="h6"
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Business Marketing"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="User Analytic"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Live Chat"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Unlimited Support"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
@@ -658,40 +627,35 @@ export default function Home() {
           <Box>
             <Title
               title="Resources"
-              fontSize={16}
-              lineHeight={24}
+              variant="h6"
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="IOS & Android"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Watch a Demo"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="Customers"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
             <SubTitle
               title="API"
-              fontSize={14}
+              variant="body2"
               fontWeight={700}
-              lineHeight={24}
               textAlign="left"
               gutterBottom
             />
@@ -699,8 +663,7 @@ export default function Home() {
           <Box>
             <Title
               title="Get In Touch"
-              fontSize={16}
-              lineHeight={24}
+              variant="h6"
               textAlign="left"
               gutterBottom
               marginBottom="20px"
@@ -719,9 +682,9 @@ export default function Home() {
             />
             <SubTitle
               title="Lore imp sum dolor Amit"
-              fontSize={12}
-              lineHeight={28}
+              variant="subtitle2"
               textAlign="left"
+              marginY={0.5}
             />
           </Box>
         </Box>
@@ -729,11 +692,10 @@ export default function Home() {
       <Box paddingY={"40px"} bgcolor={"#FAFAFA"}>
         <Container>
           <SubTitle
+            textAlign={{ xs: "center", md: "left" }}
             title={"Made With Love By Finland All Right Reserved "}
-            fontSize={14}
-            lineHeight={24}
+            variant="body2"
             fontWeight={700}
-            textAlign={"left"}
           />
         </Container>
       </Box>
