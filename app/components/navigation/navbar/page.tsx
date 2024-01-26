@@ -140,41 +140,45 @@ const Navbar = () => {
           <Search fontSize="medium" sx={{ color: "#23A6F0" }} />
           <Box position="relative" marginTop={0.5} onClick={handleOpenCart}>
             <ShoppingCart fontSize="medium" sx={{ color: "#23A6F0" }} />
-            <Box
-              textAlign="center"
-              width={20}
-              height={20}
-              top={-8}
-              left={12}
-              bgcolor="#23856d"
-              borderRadius={20}
-              padding={0.2}
-              position="absolute"
-              fontSize={12}
-              fontWeight={600}
-              color="#fff"
-            >
-              {cartData.length}
-            </Box>
+            {!!cartData.length && (
+              <Box
+                textAlign="center"
+                width={20}
+                height={20}
+                top={-8}
+                left={12}
+                bgcolor="#23856d"
+                borderRadius={20}
+                padding={0.2}
+                position="absolute"
+                fontSize={12}
+                fontWeight={600}
+                color="#fff"
+              >
+                {cartData.length}
+              </Box>
+            )}
           </Box>
           <Box position="relative" marginTop={0.5} onClick={handleOpenWishList}>
             <FavoriteOutlined fontSize="medium" sx={{ color: "#23A6F0" }} />
-            <Box
-              textAlign="center"
-              width={20}
-              height={20}
-              top={-8}
-              left={12}
-              bgcolor="#23856d"
-              borderRadius={20}
-              padding={0.2}
-              position="absolute"
-              fontSize={12}
-              fontWeight={600}
-              color="#fff"
-            >
-              {wishListData.length}
-            </Box>
+            {!!wishListData.length && (
+              <Box
+                textAlign="center"
+                width={20}
+                height={20}
+                top={-8}
+                left={12}
+                bgcolor="#23856d"
+                borderRadius={20}
+                padding={0.2}
+                position="absolute"
+                fontSize={12}
+                fontWeight={600}
+                color="#fff"
+              >
+                {wishListData.length}
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

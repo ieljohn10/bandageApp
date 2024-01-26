@@ -16,6 +16,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxHeight: 700,
+  minHeight: 200,
   bgcolor: "background.paper",
   borderRadius: 2,
   overflowY: "auto",
@@ -57,6 +58,8 @@ function CartModal({ open, handleClose }: any) {
       const total = totalList.reduce((prev, current) => (prev += current));
 
       setTotalPrice(total);
+    } else {
+      setTotalPrice(0);
     }
     setGroupItemInCart(groupItem);
   }, [cartData, dispatch]);
@@ -152,33 +155,43 @@ function CartModal({ open, handleClose }: any) {
         <Box
           display="flex"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent={!!totalPrice ? "space-between" : "center"}
           marginTop={2}
         >
-          <Typography
-            marginX={1}
-            variant="h6"
-            textAlign="center"
-            fontWeight={600}
-          >
-            Total :
-          </Typography>
-          <Typography
-            marginX={1}
-            variant="h6"
-            width={50}
-            textAlign="center"
-            fontWeight={600}
-          >
-            ${totalPrice}
-          </Typography>
+          {!!totalPrice ? (
+            <>
+              <Typography
+                marginX={1}
+                variant="h6"
+                textAlign="center"
+                fontWeight={600}
+              >
+                Total :
+              </Typography>
+              <Typography
+                marginX={1}
+                variant="h6"
+                width={50}
+                textAlign="center"
+                fontWeight={600}
+              >
+                ${totalPrice}
+              </Typography>
+            </>
+          ) : (
+            <Typography variant="h5" textAlign="center" marginTop={5}>
+              Empty
+            </Typography>
+          )}
         </Box>
 
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <Button sx={{ marginTop: 3, marginX: "auto" }} variant="contained">
-            Proceed to Checkout
-          </Button>
-        </Box>
+        {!!totalPrice && (
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <Button sx={{ marginTop: 3, marginX: "auto" }} variant="contained">
+              Proceed to Checkout
+            </Button>
+          </Box>
+        )}
       </Box>
     </Modal>
   );

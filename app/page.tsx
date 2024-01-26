@@ -84,6 +84,8 @@ export default function Home() {
 
   useEffect(() => {
     fetchProductData(10, 0);
+    const cartData = window.localStorage.getItem("cartData");
+    console.log(cartData);
   }, []);
 
   return (

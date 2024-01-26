@@ -39,11 +39,15 @@ export const basketSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.value = action.payload;
+      window.localStorage.setItem("basketData", JSON.stringify(state.value));
+    },
+    addToBasketFromLocalStorage: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addItem } = basketSlice.actions;
+export const { addItem, addToBasketFromLocalStorage } = basketSlice.actions;
 
 export default basketSlice.reducer;

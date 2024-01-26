@@ -30,6 +30,14 @@ export const wishListSlice = createSlice({
   reducers: {
     addToWishList: (state, action: PayloadAction<Item>) => {
       state.products = [...state.products, action.payload];
+      window.localStorage.setItem(
+        "wishListData",
+        JSON.stringify(state.products)
+      );
+    },
+
+    addToWishListFromLocalStorage: (state, action: PayloadAction<Item[]>) => {
+      state.products = action.payload;
     },
 
     removeFromWishList: (state, action: PayloadAction<{ id: number }>) => {
@@ -39,6 +47,10 @@ export const wishListSlice = createSlice({
       );
 
       state.products = newWishList;
+      window.localStorage.setItem(
+        "wishListData",
+        JSON.stringify(state.products)
+      );
     },
   },
 });
@@ -47,6 +59,10 @@ export const selectWishListItems = (state: any) => state.wishList.products;
 export const selectWishListItemsWithId = (state: any, id: number) =>
   state.wishList.products.filter((item: any) => item.id === id);
 
-export const { addToWishList, removeFromWishList } = wishListSlice.actions;
+export const {
+  addToWishList,
+  addToWishListFromLocalStorage,
+  removeFromWishList,
+} = wishListSlice.actions;
 
 export default wishListSlice.reducer;

@@ -19,6 +19,7 @@ function ImageContainer({
       width={width}
       src={thumbnail}
       alt={title}
+      loading="lazy"
     />
   );
 }

@@ -30,6 +30,11 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
       state.products = [...state.products, action.payload];
+      window.localStorage.setItem("cartData", JSON.stringify(state.products));
+    },
+
+    addToCartFromLocalStorage: (state, action: PayloadAction<Item[]>) => {
+      state.products = action.payload;
     },
 
     removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
@@ -46,6 +51,7 @@ export const cartSlice = createSlice({
       }
 
       state.products = newCart;
+      window.localStorage.setItem("cartData", JSON.stringify(state.products));
     },
   },
 });
@@ -54,6 +60,7 @@ export const selectCartItems = (state: any) => state.cart.products;
 export const selectCartItemsWithId = (state: any, id: number) =>
   state.cart.products.filter((item: any) => item.id === id);
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, addToCartFromLocalStorage, removeFromCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

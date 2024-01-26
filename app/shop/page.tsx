@@ -122,8 +122,8 @@ function Shop() {
         <Box alignSelf="center">
           <Box width={{ sm: 334, md: 506 }} height={{ sm: 334, md: 450 }}>
             <ImageContainer
-              thumbnail={basketItem?.thumbnail || Coffee}
-              title={basketItem?.title || "coffee"}
+              thumbnail={basketItem?.thumbnail}
+              title={basketItem?.title}
             />
           </Box>
           <Box display="flex" gap={3} marginTop={1}>
