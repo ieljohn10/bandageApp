@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { addToWishListFromLocalStorage } from "./features/wishlist/wishlist";
 import { addToBasketFromLocalStorage } from "./features/basket/basket";
 
-const Mark = ({ children }: any) => {
+const Wrapper = ({ children }: any) => {
   const dispatch = useDispatch();
   useEffect(() => {
     const basketData = window.localStorage.getItem("basketData");
@@ -36,14 +36,14 @@ const Mark = ({ children }: any) => {
 function Main({ children }: any) {
   return (
     <Provider store={store}>
-      <Mark>
+      <Wrapper>
         <CustomFont>
           <Contacts />
           <Navigation />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
           <Footer />
         </CustomFont>
-      </Mark>
+      </Wrapper>
     </Provider>
   );
 }
